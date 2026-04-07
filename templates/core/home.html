@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Welcome to Hirely</h1>
+    <p>A finance recruitment platform built with Django.</p>
+
+    {% if not user.is_authenticated %}
+        <a href="{% url 'register' %}" class="btn btn-primary">Get Started</a>
+    {% endif %}
+</div>
+{% endblock %}

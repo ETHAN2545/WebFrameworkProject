@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<p>Welcome, {{ user.username }}!</p>
+<p>Your role is: <strong>{{ user.role }}</strong></p>
+
+{% if user.role == 'ADMIN' %}
+    <p>You can manage the whole Hirely system.</p>
+{% elif user.role == 'RECRUITER' %}
+    <p>You can manage jobs, applications, and interviews.</p>
+{% elif user.role == 'CANDIDATE' %}
+    <p>You can manage your profile, skills, and job applications.</p>
+{% endif %}
+{% endblock %}

@@ -68,6 +68,10 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'
+
 WSGI_APPLICATION = 'hirely_project.wsgi.application'
 
 

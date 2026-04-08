@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Candidate Profile</h2>
+
+{% if profile %}
+    <p><strong>Full name:</strong> {{ profile.full_name }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Experience:</strong> {{ profile.experience }} year(s)</p>
+
+    <h4>Skills</h4>
+    {% if profile.skills.all %}
+        <ul>
+            {% for skill in profile.skills.all %}
+                <li>
+                    {{ skill.name }}
+                    <a href="{% url 'remove_skill' skill.id %}" class="btn btn-sm btn-danger">Remove</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No skills added yet.</p>
+    {% endif %}
+
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+    <a href="{% url 'add_skill' %}" class="btn btn-success">Add Skill</a>
+{% else %}
+    <p>You have not created a profile yet.</p>
+    <a href="{% url 'create_profile' %}" class="btn btn-primary">Create Profile</a>
+{% endif %}
+{% endblock %}

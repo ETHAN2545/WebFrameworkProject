@@ -101,7 +101,7 @@ def job_detail(request, job_id):
         if profile:
             already_applied = Application.objects.filter(candidate=profile, job=job).exists()
             
-    return render(request, 'recruitment/job_detail.htmml', {
+    return render(request, 'recruitment/job_detail.html', {
         'job': job,
         'already_applied': already_applied
     })

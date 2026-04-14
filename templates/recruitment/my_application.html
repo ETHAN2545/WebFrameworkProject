@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Applications</h2>
+
+{% if applications %}
+    <ul class="list-group">
+        {% for application in applications %}
+            <li class="list-group-item">
+                <h5>{{ application.job.title }}</h5>
+                <p><strong>Status:</strong> {{ application.status }}</p>
+                <p><strong>Applied on:</strong> {{ application.applied_at }}</p>
+                <a href="{% url 'job_detail' application.job.id %}" class="btn btn-sm btn-outline-primary">View Job</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have not applied for any jobs yet.</p>
+{% endif %}
+{% endblock %}

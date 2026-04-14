@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import CandidateProfileForm, SkillForm
-from .models import CandidateProfile, Skill
+from .forms import CandidateProfileForm, SkillForm, JobForm, ApplicationForm
+from .models import CandidateProfile, Skill, Job, Application
 
 def candidate_required(user):
     return user.role == 'CANDIDATE'

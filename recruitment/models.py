@@ -58,3 +58,12 @@ class Application(models.Model):
         
     def __str__(self):
         return f"{self.candidate.full_name} - {self.job.title}"
+    
+class Interview(models.Model):
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    interview_date = models.DateTimeField()
+    location = models.CharField(max_length=200)
+    notes = models.TextField(blank=True)
+    
+    def __str__(self):
+        return f"Interview for {self.application.candidate.full_name} - {self.application.job.title}"

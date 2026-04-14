@@ -12,7 +12,7 @@
         {% for job in jobs %}
             <li class="list-group-item">
                 <h5>{{ job.title }}</h5>
-                <p>{{ job.location }} | £{{ job.salary }}</p>
+                <p>{{ job.location }} | €{{ job.salary }}</p>
                 <a href="{% url 'job_detail' job.id %}" class="btn btn-sm btn-outline-primary">View Details</a>
             </li>
         {% endfor %}

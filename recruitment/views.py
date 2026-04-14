@@ -154,3 +154,38 @@ def delete_job(request, job_id):
         return redirect('job_list')
     
     return render(request, 'recruitment/job_confirm_delete.html', {'job': job})
+
+@login_required
+def apply_for_job(request, job_id):
+    if not candidate_required(request.user):
+        return HttpResponseForbidden("Only candidates can apply for jobs.")
+
+    job = get_object_or_404(Job, id=job_id)
+    profile = get_object_or_404(CandidateProfile, user=request.user)
+
+    if Application.objects.filter(candidate=profile, job=job).exists():
+        return redirect('job_detail', job_id=job.id)
+
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.candidate = profile
+            application.job = job
+            application.save()
+            return redirect('my_applications')
+    else:
+        form = ApplicationForm()
+
+    return render(request, 'recruitment/apply_for_job.html', {'form': form, 'job': job})
+
+
+@login_required
+def my_applications(request):
+    if not candidate_required(request.user):
+        return HttpResponseForbidden("Only candidates can access this page.")
+
+    profile = get_object_or_404(CandidateProfile, user=request.user)
+    applications = Application.objects.filter(candidate=profile).order_by('-applied_at')
+
+    return render(request, 'recruitment/my_applications.html', {'applications': applications})

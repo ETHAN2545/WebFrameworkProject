@@ -16,7 +16,7 @@ def dashboard(request):
         
         if profile:
             applications_count = Application.objects.filter(candidate=profile).count()
-            interviews_count = Interview.objects.filter(applications__candidate=profile).count()
+            interviews_count = Interview.objects.filter(application__candidate=profile).count()
         
         context = {
             'profile': profile,

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Interviews</h2>
+
+{% if interviews %}
+    <ul class="list-group">
+        {% for interview in interviews %}
+            <li class="list-group-item">
+                <h5>{{ interview.application.job.title }}</h5>
+                <p><strong>Date:</strong> {{ interview.interview_date }}</p>
+                <p><strong>Location:</strong> {{ interview.location }}</p>
+                <p><strong>Notes:</strong> {{ interview.notes }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have no interviews scheduled yet.</p>
+{% endif %}
+{% endblock %}

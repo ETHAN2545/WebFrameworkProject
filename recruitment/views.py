@@ -193,7 +193,7 @@ def my_applications(request):
 @login_required
 def recruiter_applications(request):
     if not recruiter_required(request.user):
-        return HttpResponseForbidden("Only candidates can access this page.")
+        return HttpResponseForbidden("Only recruiters can access this page.")
     
     applications = Application.objects.filter(job__recruiter=request.user).order_by('-applied_at')
     return render(request, 'recruitment/recruiter_applications.html', {'applications': applications})
@@ -201,7 +201,7 @@ def recruiter_applications(request):
 @login_required
 def update_application_status(request, application_id):
     if not recruiter_required(request.user):
-        return HttpResponseForbidden("Only candidates can access this page.")
+        return HttpResponseForbidden("Only recruiters can access this page.")
     
     application = get_object_or_404(Application, id=application_id, job__recruiter=request.user)
     
@@ -217,3 +217,36 @@ def update_application_status(request, application_id):
         'form': form,
         'application': application
     })
+    
+@login_required
+def schedule_interview(request, application_id):
+    if not recruiter_required(request.user):
+        return HttpResponseForbidden("Only recruiters can access this page.")
+    
+    application = get_object_or_404(Application, id=application_id, job__recruiter=request.user)
+    
+    if request.method == 'POST':
+        form = InterviewForm(request.POST)
+        if form.is_valid():
+            interview = form.save(commit=False)
+            interview.application = application
+            interview.save()
+            return redirect('recruiter_applications')
+    else:
+        form = InterviewForm()
+
+    return render(request, 'recruitment/schedule_interview.html', {
+        'form': form,
+        'application': application
+    })
+
+
+@login_required
+def my_interviews(request):
+    if not candidate_required(request.user):
+        return HttpResponseForbidden("Only candidates can access this page.")
+
+    profile = get_object_or_404(CandidateProfile, user=request.user)
+    interviews = Interview.objects.filter(application__candidate=profile).order_by('interview_date')
+
+    return render(request, 'recruitment/my_interviews.html', {'interviews': interviews})

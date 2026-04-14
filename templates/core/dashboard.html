@@ -7,10 +7,32 @@
 <p>Your role is: <strong>{{ user.role }}</strong></p>
 
 {% if user.role == 'ADMIN' %}
-    <p>You can manage the whole Hirely system.</p>
-{% elif user.role == 'RECRUITER' %}
+    <p>You can manage the whole Hirely system through the admin panel.</p>
+    <a href="/admin/" class="btn btn-primary">Go to Admin</a>
+{% endif %}
+
+{% if user.role == 'CANDIDATE' %}
+    <p>You can manage your profile, skills, job applications, and interviews.</p>
+
+    {% if profile %}
+        <p><strong>Applications:</strong> {{ applications_count }}</p>
+        <p><strong>Interviews:</strong> {{ interviews_count }}</p>
+        <a href="{% url 'profile' %}" class="btn btn-primary">My Profile</a>
+        <a href="{% url 'my_applications' %}" class="btn btn-outline-primary">My Applications</a>
+        <a href="{% url 'my_interviews' %}" class="btn btn-outline-success">My Interviews</a>
+    {% else %}
+        <p>You have not created a candidate profile yet.</p>
+        <a href="{% url 'create_profile' %}" class="btn btn-primary">Create Profile</a>
+    {% endif %}
+{% endif %}
+
+{% if user.role == 'RECRUITER' %}
     <p>You can manage jobs, applications, and interviews.</p>
-{% elif user.role == 'CANDIDATE' %}
-    <p>You can manage your profile, skills, and job applications.</p>
+    <p><strong>Jobs Posted:</strong> {{ jobs_count }}</p>
+    <p><strong>Total Applications:</strong> {{ applications_count }}</p>
+    <p><strong>Scheduled Interviews:</strong> {{ interviews_count }}</p>
+
+    <a href="{% url 'create_job' %}" class="btn btn-primary">Post Job</a>
+    <a href="{% url 'recruiter_applications' %}" class="btn btn-outline-primary">View Applications</a>
 {% endif %}
 {% endblock %}

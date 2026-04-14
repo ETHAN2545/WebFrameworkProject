@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import CandidateProfileForm, SkillForm, JobForm, ApplicationForm
-from .models import CandidateProfile, Skill, Job, Application
+from .forms import CandidateProfileForm, SkillForm, JobForm, ApplicationForm, ApplicationStatusForm, InterviewForm
+from .models import CandidateProfile, Skill, Job, Application, Interview
 
 def candidate_required(user):
     return user.role == 'CANDIDATE'
@@ -189,3 +189,31 @@ def my_applications(request):
     applications = Application.objects.filter(candidate=profile).order_by('-applied_at')
 
     return render(request, 'recruitment/my_applications.html', {'applications': applications})
+
+@login_required
+def recruiter_applications(request):
+    if not recruiter_required(request.user):
+        return HttpResponseForbidden("Only candidates can access this page.")
+    
+    applications = Application.objects.filter(job__recruiter=request.user).order_by('-applied_at')
+    return render(request, 'recruitment/recruiter_applications.html', {'applications': applications})
+
+@login_required
+def update_application_status(request, application_id):
+    if not recruiter_required(request.user):
+        return HttpResponseForbidden("Only candidates can access this page.")
+    
+    application = get_object_or_404(Application, id=application_id, job__recruiter=request.user)
+    
+    if request.method == 'POST':
+        form = ApplicationStatusForm(request.POST, instance=application)
+        if form.is_valid():
+            form.save()
+            return redirect('recruiter_applications')
+    else:
+        form = ApplicationStatusForm(instance=application)
+        
+    return render(request, 'recruitment/update_application_status.html', {
+        'form': form,
+        'application': application
+    })

@@ -1,5 +1,5 @@
 from django import forms
-from .models import CandidateProfile, Skill, Job, Application
+from .models import CandidateProfile, Skill, Job, Application, Interview
 
 class CandidateProfileForm(forms.ModelForm):
     class Meta:
@@ -23,3 +23,16 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = ['cover_letter']
+        
+class ApplicationStatusForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ['status']
+        
+class InterviewForm(forms.ModelForm):
+    class Meta:
+        model = Interview 
+        fields = ['interview_date', 'location', 'notes']
+        widgets = {
+            'interview_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }

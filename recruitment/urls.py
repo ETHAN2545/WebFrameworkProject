@@ -16,4 +16,10 @@ urlpatterns = [
 
     path('jobs/<int:job_id>/apply/', views.apply_for_job, name='apply_for_job'),
     path('applications/', views.my_applications, name='my_applications'),
+    
+    path('recruiter/applications/', views.recruiter_applications, name='recruiter_applications'),
+    path('applications/<int:application_id>/status/', views.update_application_status, name='update_application_status'),
+    path('applications/<int:application_id>/interview/', views.schedule_interview, name='schedule_interview'),
+
+    path('interviews/', views.my_interviews, name='my_interviews'),
 ]

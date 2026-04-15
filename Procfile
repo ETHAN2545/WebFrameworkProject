@@ -1,0 +1,1 @@
+web: gunicorn hirely_project.wsgi

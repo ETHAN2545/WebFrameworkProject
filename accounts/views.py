@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import RegisterForm
 
+
 def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -14,6 +15,7 @@ def register_view(request):
 
     return render(request, 'accounts/register.html', {'form': form})
 
+
 def login_view(request):
     error_message = None
 
@@ -25,11 +27,16 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
+
+            if user.role == 'ADMIN':
+                return redirect('/admin/')
+
             return redirect('dashboard')
         else:
             error_message = 'Invalid username or password'
 
     return render(request, 'accounts/login.html', {'error_message': error_message})
+
 
 def logout_view(request):
     logout(request)

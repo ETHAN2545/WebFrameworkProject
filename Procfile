@@ -1,1 +1,1 @@
-web: gunicorn hirely_project.wsgi
+web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn hirely_project.wsgi

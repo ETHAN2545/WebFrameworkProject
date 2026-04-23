@@ -1,0 +1,244 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$omzRPxSsUvLNKsd4cv2euR$AFQCNLse/jmNq5S/H9YJQkbWH9adaCsgx+kUHeHyNFc=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-04-23T14:53:49.275Z",
+        "role": "ADMIN",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$hFKQmNIClJR6IJWfkgl5kz$udmKjQrkUE8bEAe9GbjaN+fREWmRc4FIKofe6Wb08ps=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "recruiter1",
+        "first_name": "",
+        "last_name": "",
+        "email": "recruiter1@hirely.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-04-23T14:53:50.473Z",
+        "role": "RECRUITER",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$5FBkoNvwDhObCeYLDNNxlt$oJmu3TQpZYqGac0SZRNri9B59XNA+5jHK6mvrU42VjI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "candidate1",
+        "first_name": "",
+        "last_name": "",
+        "email": "candidate1@candidate1.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-04-23T14:53:51.784Z",
+        "role": "CANDIDATE",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$TfblV9B5rsD27N4tSmAYXu$gh3RV3yhqqIECQl6BEfVHixFJrzlHBdH14MssZPUrZc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "candidate2",
+        "first_name": "",
+        "last_name": "",
+        "email": "candidate2@candidate2.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-04-23T14:53:53.463Z",
+        "role": "CANDIDATE",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "recruitment.skill",
+    "pk": 1,
+    "fields": {
+        "name": "Excel"
+    }
+},
+{
+    "model": "recruitment.skill",
+    "pk": 2,
+    "fields": {
+        "name": "Financial Analysis"
+    }
+},
+{
+    "model": "recruitment.skill",
+    "pk": 3,
+    "fields": {
+        "name": "Budgeting"
+    }
+},
+{
+    "model": "recruitment.skill",
+    "pk": 4,
+    "fields": {
+        "name": "Auditing"
+    }
+},
+{
+    "model": "recruitment.skill",
+    "pk": 5,
+    "fields": {
+        "name": "Taxation"
+    }
+},
+{
+    "model": "recruitment.skill",
+    "pk": 6,
+    "fields": {
+        "name": "Communication"
+    }
+},
+{
+    "model": "recruitment.candidateprofile",
+    "pk": 1,
+    "fields": {
+        "user": 3,
+        "full_name": "Candidate One",
+        "phone": "0871111111",
+        "bio": "Graduate candidate interested in finance roles.",
+        "experience": 1,
+        "skills": [
+            1,
+            2,
+            6
+        ]
+    }
+},
+{
+    "model": "recruitment.candidateprofile",
+    "pk": 2,
+    "fields": {
+        "user": 4,
+        "full_name": "Candidate Two",
+        "phone": "0872222222",
+        "bio": "Junior candidate with strong finance and audit skills.",
+        "experience": 2,
+        "skills": [
+            1,
+            4,
+            5
+        ]
+    }
+},
+{
+    "model": "recruitment.job",
+    "pk": 1,
+    "fields": {
+        "recruiter": 2,
+        "title": "Junior Financial Analyst",
+        "description": "Support budgeting and reporting tasks.",
+        "location": "Dublin",
+        "salary": "32000.00",
+        "created_at": "2026-04-23T14:53:55.285Z",
+        "required_skills": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "recruitment.job",
+    "pk": 2,
+    "fields": {
+        "recruiter": 2,
+        "title": "Audit Assistant",
+        "description": "Assist with internal and external audit processes.",
+        "location": "Dublin",
+        "salary": "30000.00",
+        "created_at": "2026-04-23T14:53:55.323Z",
+        "required_skills": [
+            4,
+            6
+        ]
+    }
+},
+{
+    "model": "recruitment.job",
+    "pk": 3,
+    "fields": {
+        "recruiter": 2,
+        "title": "Tax Associate",
+        "description": "Support tax preparation and finance compliance work.",
+        "location": "Cork",
+        "salary": "34000.00",
+        "created_at": "2026-04-23T14:53:55.360Z",
+        "required_skills": [
+            1,
+            5
+        ]
+    }
+},
+{
+    "model": "recruitment.application",
+    "pk": 1,
+    "fields": {
+        "candidate": 1,
+        "job": 1,
+        "cover_letter": "I am interested in the Junior Financial Analyst role.",
+        "applied_at": "2026-04-23T14:53:55.389Z",
+        "status": "PENDING"
+    }
+},
+{
+    "model": "recruitment.application",
+    "pk": 2,
+    "fields": {
+        "candidate": 2,
+        "job": 2,
+        "cover_letter": "I have strong audit and communication skills.",
+        "applied_at": "2026-04-23T14:53:55.409Z",
+        "status": "SHORTLISTED"
+    }
+},
+{
+    "model": "recruitment.application",
+    "pk": 3,
+    "fields": {
+        "candidate": 1,
+        "job": 3,
+        "cover_letter": "I would like to apply for the Tax Associate role.",
+        "applied_at": "2026-04-23T14:53:55.430Z",
+        "status": "REVIEWED"
+    }
+},
+{
+    "model": "recruitment.interview",
+    "pk": 1,
+    "fields": {
+        "application": 2,
+        "interview_date": "2026-04-30T14:54:03.902Z",
+        "location": "Meeting Room 2, Dublin Office",
+        "notes": "Bring updated CV and photo ID."
+    }
+}
+]

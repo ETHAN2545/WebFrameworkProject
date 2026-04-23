@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Applications for My Jobs</h2>
+<h2>Hiring Manager Applications View</h2>
 
 {% if applications %}
     <ul class="list-group">
@@ -11,13 +11,10 @@
                 <p><strong>Status:</strong> {{ application.status }}</p>
                 <p><strong>Applied on:</strong> {{ application.applied_at }}</p>
                 <p><strong>Cover Letter:</strong> {{ application.cover_letter }}</p>
-
-                <a href="{% url 'update_application_status' application.id %}" class="btn btn-sm btn-primary">Update Status</a>
-                <a href="{% url 'schedule_interview' application.id %}" class="btn btn-sm btn-success">Schedule Interview</a>
             </li>
         {% endfor %}
     </ul>
 {% else %}
-    <p>No applications yet.</p>
+    <p>No applications available.</p>
 {% endif %}
 {% endblock %}

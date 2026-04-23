@@ -24,4 +24,5 @@ urlpatterns = [
     path('interviews/', views.my_interviews, name='my_interviews'),
     
     path('manager/applications/', views.manager_applications, name='manager_applications'),
+    path('manager/applications/<int:application_id>/status/', views.manager_update_application_status, name='manager_update_application_status'),
 ]

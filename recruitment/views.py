@@ -11,6 +11,9 @@ def candidate_required(user):
 def recruiter_required(user):
     return user.role == 'RECRUITER'
 
+def hiring_manager_required(user):
+    return user.role == 'HIRING_MANAGER'
+
 @login_required
 def profile_view(request):
     if not candidate_required(request.user):

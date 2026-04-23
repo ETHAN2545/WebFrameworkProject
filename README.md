@@ -1,8 +1,10 @@
 # WebFrameworkProject
 
 Logins:
-username: candidate1 and password testpassword1
+username: candidate1 and password
 
-username: recruiter1 and password testpassword2
+username: recruiter1 and password 
 
-username: Admin and password hirely12345
+username: manager1 and password
+
+username: admin and password 

@@ -263,3 +263,23 @@ def manager_applications(request):
     return render(request, 'recruitment/manager_applications.html', {
         'applications': applications
     })
+    
+@login_required
+def manager_update_application_status(request, application_id):
+    if not hiring_manager_required(request.user):
+        return HttpResponseForbidden("Only hiring managers can access this page.")
+
+    application = get_object_or_404(Application, id=application_id)
+
+    if request.method == 'POST':
+        form = ApplicationStatusForm(request.POST, instance=application)
+        if form.is_valid():
+            form.save()
+            return redirect('manager_applications')
+    else:
+        form = ApplicationStatusForm(instance=application)
+
+    return render(request, 'recruitment/manager_update_status.html', {
+        'form': form,
+        'application': application
+    })

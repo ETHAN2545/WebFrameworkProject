@@ -1,20 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Hiring Manager Applications View</h2>
+<h2 class="mb-4">Hiring Manager Applications View</h2>
 
 {% if applications %}
     <ul class="list-group">
+
         {% for application in applications %}
-            <li class="list-group-item">
-                <h5>{{ application.candidate.full_name }} applied for {{ application.job.title }}</h5>
-                <p><strong>Status:</strong> {{ application.status }}</p>
-                <p><strong>Applied on:</strong> {{ application.applied_at }}</p>
-                <p><strong>Cover Letter:</strong> {{ application.cover_letter }}</p>
+            <li class="list-group-item mb-3">
+
+                <h5>
+                    {{ application.candidate.full_name }} applied for {{ application.job.title }}
+                </h5>
+
+                <p>
+                    <strong>Status:</strong> {{ application.status }}
+                </p>
+
+                <p>
+                    <strong>Applied on:</strong> {{ application.applied_at }}
+                </p>
+
+                <p>
+                    <strong>Cover Letter:</strong> {{ application.cover_letter }}
+                </p>
+
+                <a href="{% url 'manager_update_application_status' application.id %}"
+                   class="btn btn-sm btn-primary">
+                    Update Status
+                </a>
+
             </li>
         {% endfor %}
+
     </ul>
 {% else %}
     <p>No applications available.</p>
 {% endif %}
+
 {% endblock %}

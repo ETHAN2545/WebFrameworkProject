@@ -253,3 +253,13 @@ def my_interviews(request):
     interviews = Interview.objects.filter(application__candidate=profile).order_by('interview_date')
 
     return render(request, 'recruitment/my_interviews.html', {'interviews': interviews})
+
+@login_required
+def manager_applications(request):
+    if not hiring_manager_required(request.user):
+        return HttpResponseForbidden("Only hiring managers allowed")
+
+    applications = Application.objects.all()
+    return render(request, 'recruitment/manager_applications.html', {
+        'applications': applications
+    })

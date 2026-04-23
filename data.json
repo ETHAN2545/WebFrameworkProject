@@ -149,6 +149,26 @@
         ]
     }
 },
+
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$5FBkoNvwDhObCeYLDNNxlt$oJmu3TQpZYqGac0SZRNri9B59XNA+5jHK6mvrU42VjI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "manager1",
+        "first_name": "",
+        "last_name": "",
+        "email": "manager1@hirely.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-04-23T14:53:54.000Z",
+        "role": "HIRING_MANAGER",
+        "groups": [],
+        "user_permissions": []
+    }
+},
 {
     "model": "recruitment.job",
     "pk": 1,
